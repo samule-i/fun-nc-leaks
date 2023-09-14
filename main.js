@@ -9,6 +9,7 @@ function makeRequest(){
     }
 
     const request = https.request(options, (response) => {
+        
         response.on('error', (error)=>{console.log(error)})
         response.on('data', (data)=>{
             markdown = JSON.parse(data).instructions
@@ -16,7 +17,9 @@ function makeRequest(){
                 if (error) console.log(error)
             })
         })
+
     })
+
     request.end()
     return
 }
