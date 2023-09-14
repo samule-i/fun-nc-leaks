@@ -9,10 +9,13 @@ function makeRequest(){
     }
 
     const request = https.request(options, (response) => {
-        
+        let result = ''
         response.on('error', (error)=>{console.log(error)})
         response.on('data', (data)=>{
-            markdown = JSON.parse(data).instructions
+            result += data
+        })
+        response.on('end', ()=>{
+            markdown = JSON.parse(result).instructions
             fs.writeFile('./instructions.md', markdown, (error) => {
                 if (error) console.log(error)
             })

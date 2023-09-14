@@ -12,17 +12,20 @@ function getPeople () {
     const request = https.request(options, (response) =>{
         let body = ''
         response.on('error', (error) => {console.log(error)})
+
+
         response.on('data', (data) => {
             body += data.toString()
         })
         
         response.on('end', () => {
             //
-            fs.writeFile('northcoders.json', body, (error) => {
+            const bodyObject = JSON.parse(body)
+            fs.writeFile('northcoders.json', JSON.stringify(bodyObject, null, 2), (error) => {
                 if (error) console.log(error)
             })
         })
     })
     request.end()
 }
-getPeople()
+module.exports = getPeople

@@ -30,4 +30,4 @@ function getInterests(){
     
 }
 
-getInterests()
+module.exports = getInterests
